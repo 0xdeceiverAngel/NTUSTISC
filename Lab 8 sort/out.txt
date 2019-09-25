@@ -1,0 +1,100 @@
+/ (fcn) main 446
+|   main (int argc, char **argv, char **envp);
+|           ; var int local_138b4h @ rbp-0x138b4 //size
+|           ; var int local_138b0h @ rbp-0x138b0 // for i
+|           ; var int local_138ach @ rbp-0x138ac // for i
+|           ; var int local_138a8h @ rbp-0x138a8 // tmp
+|           ; var int local_138a0h @ rbp-0x138a0 //array
+|           ; var int local_20h @ rbp-0x20       //name   4
+|           ; var int local_8h @ rbp-0x8         //canary 1
+|           ; arg int arg_138a0h @ rbp+0x138a 
+|           ; DATA XREF from entry0 (0x7cd)
+|           0x00000905      55             push rbp
+|           0x00000906      4889e5         mov rbp, rsp
+|           0x00000909      4881ecc03801.  sub rsp, 0x138c0
+|           0x00000910      64488b042528.  mov rax, qword fs:[0x28]    ; [0x28:8]=0x1ab0 ; '('
+|           0x00000919      488945f8       mov qword [local_8h], rax
+|           0x0000091d      31c0           xor eax, eax
+|           0x0000091f      488b05ea0620.  mov rax, qword [obj.stdout__GLIBC_2.2.5] ; obj.__TMC_END ; [0x201010:8]=0
+|           0x00000926      b900000000     mov ecx, 0
+|           0x0000092b      ba02000000     mov edx, 2
+|           0x00000930      be00000000     mov esi, 0
+|           0x00000935      4889c7         mov rdi, rax
+|           0x00000938      e843feffff     call sym.imp.setvbuf        ; int setvbuf(FILE*stream, char *buf, int mode, size_t size)
+|           0x0000093d      488b05dc0620.  mov rax, qword [obj.stdin__GLIBC_2.2.5] ; [0x201020:8]=0
+|           0x00000944      b900000000     mov ecx, 0
+|           0x00000949      ba02000000     mov edx, 2
+|           0x0000094e      be00000000     mov esi, 0
+|           0x00000953      4889c7         mov rdi, rax
+|           0x00000956      e825feffff     call sym.imp.setvbuf        ; int setvbuf(FILE*stream, char *buf, int mode, size_t size)
+|           0x0000095b      488d3df60100.  lea rdi, qword str.Welcome_to_the_sorting_service ; 0xb58 ; "Welcome to the sorting service!"
+|           0x00000962      e8c9fdffff     call sym.imp.puts           ; int puts(const char *s)
+|           0x00000967      488d3d0a0200.  lea rdi, qword str.Please_enter_array_size__1_10000_: ; 0xb78 ; "Please enter array size (1~10000):"
+|           0x0000096e      e8bdfdffff     call sym.imp.puts           ; int puts(const char *s)
+|           0x00000973      488d854cc7fe.  lea rax, qword [local_138b4h]
+|           0x0000097a      4889c6         mov rsi, rax
+|           0x0000097d      488d3d170200.  lea rdi, qword [0x00000b9b] ; "%d"
+|           0x00000984      b800000000     mov eax, 0
+|           0x00000989      e802feffff     call sym.imp.__isoc99_scanf ; int scanf(const char *format)
+|           0x0000098e      488d3d090200.  lea rdi, qword str.Please_enter_the_array: ; 0xb9e ; "Please enter the array:"
+|           0x00000995      e896fdffff     call sym.imp.puts           ; int puts(const char *s)
+|           0x0000099a      c78550c7feff.  mov dword [local_138b0h], 0
+|       ,=< 0x000009a4      eb45           jmp 0x9eb
+|      .--> 0x000009a6      488d8558c7fe.  lea rax, qword [local_138a8h]
+|      :|   0x000009ad      4889c6         mov rsi, rax
+|      :|   0x000009b0      488d3dff0100.  lea rdi, qword [0x00000bb6] ; "%lld"
+|      :|   0x000009b7      b800000000     mov eax, 0
+|      :|   0x000009bc      e8cffdffff     call sym.imp.__isoc99_scanf ; int scanf(const char *format)
+|      :|   0x000009c1      488b8558c7fe.  mov rax, qword [local_138a8h]
+|      :|   0x000009c8      4885c0         test rax, rax
+|     ,===< 0x000009cb      7817           js 0x9e4
+|     |:|   0x000009cd      488b9558c7fe.  mov rdx, qword [local_138a8h]
+|     |:|   0x000009d4      8b8550c7feff   mov eax, dword [local_138b0h]
+|     |:|   0x000009da      4898           cdqe
+|     |:|   0x000009dc      488994c560c7.  mov qword [rbp + rax*8 - 0x138a0], rdx
+|     `---> 0x000009e4      838550c7feff.  add dword [local_138b0h], 1
+|      :|   ; CODE XREF from main (0x9a4)
+|      :`-> 0x000009eb      8b854cc7feff   mov eax, dword [local_138b4h]
+|      :    0x000009f1      398550c7feff   cmp dword [local_138b0h], eax
+|      `==< 0x000009f7      7cad           jl 0x9a6
+|           0x000009f9      8b854cc7feff   mov eax, dword [local_138b4h]
+|           0x000009ff      4863f0         movsxd rsi, eax
+|           0x00000a02      488d8560c7fe.  lea rax, qword [local_138a0h]
+|           0x00000a09      488d0daafeff.  lea rcx, qword [sym.comp]   ; 0x8ba
+|           0x00000a10      ba08000000     mov edx, 8
+|           0x00000a15      4889c7         mov rdi, rax
+|           0x00000a18      e823fdffff     call sym.imp.qsort
+|           0x00000a1d      488d3d970100.  lea rdi, qword str.Here_is_the_result ; 0xbbb ; "Here is the result"
+|           0x00000a24      e807fdffff     call sym.imp.puts           ; int puts(const char *s)
+|           0x00000a29      c78554c7feff.  mov dword [local_138ach], 0
+|       ,=< 0x00000a33      eb2b           jmp 0xa60
+|      .--> 0x00000a35      8b8554c7feff   mov eax, dword [local_138ach]
+|      :|   0x00000a3b      4898           cdqe
+|      :|   0x00000a3d      488b84c560c7.  mov rax, qword [rbp + rax*8 - 0x138a0]
+|      :|   0x00000a45      4889c6         mov rsi, rax
+|      :|   0x00000a48      488d3d7f0100.  lea rdi, qword str.lld      ; 0xbce ; "%lld "
+|      :|   0x00000a4f      b800000000     mov eax, 0
+|      :|   0x00000a54      e807fdffff     call sym.imp.printf         ; int printf(const char *format)
+|      :|   0x00000a59      838554c7feff.  add dword [local_138ach], 1
+|      :|   ; CODE XREF from main (0xa33)
+|      :`-> 0x00000a60      8b854cc7feff   mov eax, dword [local_138b4h]
+|      :    0x00000a66      398554c7feff   cmp dword [local_138ach], eax
+|      `==< 0x00000a6c      7cc7           jl 0xa35
+|           0x00000a6e      488d3d5f0100.  lea rdi, qword [0x00000bd4]
+|           0x00000a75      e8b6fcffff     call sym.imp.puts           ; int puts(const char *s)
+|           0x00000a7a      488d3d540100.  lea rdi, qword str.Please_leave_your_name: ; 0xbd5 ; "Please leave your name:"
+|           0x00000a81      e8aafcffff     call sym.imp.puts           ; int puts(const char *s)
+|           0x00000a86      488d45e0       lea rax, qword [local_20h]
+|           0x00000a8a      ba90000000     mov edx, 0x90
+|           0x00000a8f      4889c6         mov rsi, rax
+|           0x00000a92      bf00000000     mov edi, 0
+|           0x00000a97      e8d4fcffff     call sym.imp.read           ; ssize_t read(int fildes, void *buf, size_t nbyte)
+|           0x00000a9c      488d3d4d0100.  lea rdi, qword str.Thank_you_for_using_our_service ; 0xbf0 ; "Thank you for using our service!"
+|           0x00000aa3      e888fcffff     call sym.imp.puts           ; int puts(const char *s)
+|           0x00000aa8      b800000000     mov eax, 0
+|           0x00000aad      488b4df8       mov rcx, qword [local_8h]
+|           0x00000ab1      6448330c2528.  xor rcx, qword fs:[0x28]
+|       ,=< 0x00000aba      7405           je 0xac1
+|       |   0x00000abc      e88ffcffff     call sym.imp.__stack_chk_fail ; void __stack_chk_fail(void)
+|       `-> 0x00000ac1      c9             leave
+\           0x00000ac2      c3             ret
